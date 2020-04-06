@@ -12,6 +12,7 @@ public class CensusAnalyserTest
     private static final String WRONG_CSV_FILE_TYPE = "./src/test/resources/censusData.txt";
     private static final String WRONG_CSV_FILE_DELIMITER = "./src/test/resources/censusInvalidDelimiter.csv";
     private static final String WRONG_CSV_FILE_HEADER = "./src/test/resources/censusInvalidHeader.csv";
+    private static final String INDIA_STATE_CODE_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
 
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords()
@@ -20,6 +21,15 @@ public class CensusAnalyserTest
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
             Assert.assertEquals(29,numOfRecords);
+        } catch (CensusAnalyserException e) { }
+    }
+
+    @Test
+    public void givenIndianStateCodeCSVFileReturnCorrectRecords() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            int numOfStateCodes = censusAnalyser.loadIndiaCensusData(INDIA_STATE_CODE_FILE_PATH);
+            Assert.assertEquals(37,numOfStateCodes);
         } catch (CensusAnalyserException e) { }
     }
 

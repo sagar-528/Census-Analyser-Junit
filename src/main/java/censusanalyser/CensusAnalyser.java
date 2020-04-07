@@ -1,71 +1,60 @@
 package censusanalyser;
 
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
-import java.util.stream.StreamSupport;
+import java.util.List;
 
 
 public class CensusAnalyser {
-    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException
+    IcsvBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
+    public int loadIndiaCensusData(String csvFilePath) throws CSVBuilderException
     {
         this.checkValidCSVFile(csvFilePath);
         try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath)))
         {
-            IcsvBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IndiaCensusCSV> censusCSVIterator = csvBuilder.getCSVFileIterator(reader,IndiaCensusCSV.class);
-            return this.getCount(censusCSVIterator);
+            List<IndiaStateCensusCSV> csvRecords = csvBuilder.getCSVFileList(reader, IndiaStateCensusCSV.class);
+            return csvRecords.size();
         }catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new CSVBuilderException(e.getMessage(),
+                    CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch (RuntimeException e)
         {
             if (e.getMessage().contains("header!"))
-                throw new CensusAnalyserException(e.getMessage(),
-                        CensusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.INVALID_FILE_DELIMITER);
+                throw new CSVBuilderException(e.getMessage(),
+                        CSVBuilderException.ExceptionType.INVALID_FILE_HEADER);
+            throw new CSVBuilderException(e.getMessage(),
+                    CSVBuilderException.ExceptionType.INVALID_FILE_DELIMITER);
         }
     }
 
-    private void checkValidCSVFile(String csvFilePath) throws CensusAnalyserException
+    private void checkValidCSVFile(String csvFilePath) throws CSVBuilderException
     {
         if(!csvFilePath.contains(".csv"))
         {
-            throw new CensusAnalyserException("Invalid file type",
-                    CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
+            throw new CSVBuilderException("Invalid file type",
+                    CSVBuilderException.ExceptionType.INVALID_FILE_TYPE);
         }
     }
 
-    public int loadIndiaStateCode(String csvFilePath) throws CensusAnalyserException
+    public int loadIndiaStateCode(String csvFilePath) throws CSVBuilderException
     {
         this.checkValidCSVFile(csvFilePath);
         try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath)))
         {
-            IcsvBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IndiaStateCodeCSV> censusCSVIterator = csvBuilder.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
-         return this.getCount(censusCSVIterator);
+            List<IndiaStateCodeCSV> csvRecords = csvBuilder.getCSVFileList(reader,IndiaStateCodeCSV.class);
+            return csvRecords.size();
         }catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new CSVBuilderException(e.getMessage(),
+                    CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch (RuntimeException e)
         {
             if (e.getMessage().contains("header!"))
-                throw new CensusAnalyserException(e.getMessage(),
-                        CensusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.INVALID_FILE_DELIMITER);
+                throw new CSVBuilderException(e.getMessage(),
+                        CSVBuilderException.ExceptionType.INVALID_FILE_HEADER);
+            throw new CSVBuilderException(e.getMessage(),
+                    CSVBuilderException.ExceptionType.INVALID_FILE_DELIMITER);
         }
-    }
-
-    private <T> int getCount(Iterator<T> iterator){
-        Iterable<T> iterable = () -> iterator;
-        int numOfEntries = (int)StreamSupport.stream(iterable.spliterator(), false).count();
-        return numOfEntries;
     }
 }

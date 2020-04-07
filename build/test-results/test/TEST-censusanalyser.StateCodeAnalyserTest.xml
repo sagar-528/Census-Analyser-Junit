@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="censusanalyser.StateCodeAnalyserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2020-04-07T14:55:54" hostname="Sagar" time="1.901">
+  <properties/>
+  <testcase name="givenIndianStateCodeCSVFileReturnCorrectRecords" classname="censusanalyser.StateCodeAnalyserTest" time="1.219"/>
+  <testcase name="givenIndiaStateCode_WithWrongFileType_ShouldThrowException" classname="censusanalyser.StateCodeAnalyserTest" time="0.016"/>
+  <testcase name="givenIndiaStateCode_WithWrongFile_ShouldThrowException" classname="censusanalyser.StateCodeAnalyserTest" time="0.129"/>
+  <testcase name="givenIndiaStateCode_WithWrongFileDelimiter_ShouldThrowException" classname="censusanalyser.StateCodeAnalyserTest" time="0.32"/>
+  <testcase name="givenIndiaStateCode_WithWrongFileHeader_ShouldThrowException" classname="censusanalyser.StateCodeAnalyserTest" time="0.188"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

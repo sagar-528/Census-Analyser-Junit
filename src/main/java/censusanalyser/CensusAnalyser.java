@@ -18,15 +18,13 @@ public class CensusAnalyser {
     public int loadIndiaCensusData(String csvFilePath) throws CSVBuilderException
     {
         this.checkValidCSVFile(csvFilePath);
-        try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath)))
-        {
+        try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             stateCensusRecord = csvBuilder.getCSVFileList(reader, IndiaStateCensusCSV.class);
             return stateCensusRecord.size();
         }catch (IOException e) {
             throw new CSVBuilderException(e.getMessage(),
                     CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e)
-        {
+        }catch (RuntimeException e) {
             if (e.getMessage().contains("header!"))
                 throw new CSVBuilderException(e.getMessage(),
                         CSVBuilderException.ExceptionType.INVALID_FILE_HEADER);
@@ -37,8 +35,7 @@ public class CensusAnalyser {
 
     private void checkValidCSVFile(String csvFilePath) throws CSVBuilderException
     {
-        if(!csvFilePath.contains(".csv"))
-        {
+        if(!csvFilePath.contains(".csv")) {
             throw new CSVBuilderException("Invalid file type",
                     CSVBuilderException.ExceptionType.INVALID_FILE_TYPE);
         }
@@ -54,8 +51,7 @@ public class CensusAnalyser {
         }catch (IOException e) {
             throw new CSVBuilderException(e.getMessage(),
                     CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e)
-        {
+        }catch (RuntimeException e) {
             if (e.getMessage().contains("header!"))
                 throw new CSVBuilderException(e.getMessage(),
                         CSVBuilderException.ExceptionType.INVALID_FILE_HEADER);

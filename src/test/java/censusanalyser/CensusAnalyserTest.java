@@ -6,13 +6,11 @@ import org.junit.rules.ExpectedException;
 
 public class CensusAnalyserTest
 {
-
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_TYPE = "./src/test/resources/censusData.txt";
     private static final String WRONG_CSV_FILE_DELIMITER = "./src/test/resources/censusInvalidDelimiter.csv";
     private static final String WRONG_CSV_FILE_HEADER = "./src/test/resources/censusInvalidHeader.csv";
-
 
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords()
@@ -23,8 +21,6 @@ public class CensusAnalyserTest
             Assert.assertEquals(29,numOfRecords);
         } catch (CSVBuilderException e) { }
     }
-
-
 
     @Test
     public void givenIndiaCensusData_WithWrongFile_ShouldThrowException()

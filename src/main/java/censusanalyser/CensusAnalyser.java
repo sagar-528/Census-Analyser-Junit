@@ -33,20 +33,12 @@ public class CensusAnalyser {
         }
     }
 
-    private void checkValidCSVFile(String csvFilePath) throws CSVBuilderException
-    {
-        if(!csvFilePath.contains(".csv")) {
-            throw new CSVBuilderException("Invalid file type",
-                    CSVBuilderException.ExceptionType.INVALID_FILE_TYPE);
-        }
-    }
-
     public int loadIndiaStateCode(String csvFilePath) throws CSVBuilderException
     {
         this.checkValidCSVFile(csvFilePath);
         try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath)))
         {
-            stateCodeRecords = csvBuilder.getCSVFileList(reader,IndiaStateCodeCSV.class);
+            stateCodeRecords = csvBuilder.getCSVFileList(reader, IndiaStateCodeCSV.class);
             return stateCodeRecords.size();
         }catch (IOException e) {
             throw new CSVBuilderException(e.getMessage(),
@@ -60,12 +52,20 @@ public class CensusAnalyser {
         }
     }
 
+    private void checkValidCSVFile(String csvFilePath) throws CSVBuilderException
+    {
+        if(!csvFilePath.contains(".csv")) {
+            throw new CSVBuilderException("Invalid file type",
+                    CSVBuilderException.ExceptionType.INVALID_FILE_TYPE);
+        }
+    }
+
     public String getStateWiseSortedData() throws CSVBuilderException
     {
         if (stateCensusRecord == null || stateCodeRecords.size() == 0){
             throw new CSVBuilderException("Data empty", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IndiaStateCensusCSV> censusCSVComparator = Comparator.comparing(indiaStateCensusCSV -> indiaStateCensusCSV.getState());
+        Comparator<IndiaStateCensusCSV> censusCSVComparator = Comparator.comparing(state -> state.state);
         this.sort(censusCSVComparator, stateCensusRecord);
         String sortedStateCensusJson = new Gson().toJson(stateCensusRecord);
         return sortedStateCensusJson;

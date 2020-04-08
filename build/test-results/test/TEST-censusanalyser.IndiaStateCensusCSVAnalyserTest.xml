@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.IndiaStateCensusCSVAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-07T21:21:22" hostname="Sagar" time="0.375">
-  <properties/>
-  <testcase name="givenIndiaStateCode_WithWrongFile_ShouldThrowException" classname="censusanalyser.IndiaStateCensusCSVAnalyserTest" time="0.375"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

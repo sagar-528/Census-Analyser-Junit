@@ -15,6 +15,9 @@ public class IndiaStateCodeCSV {
     @CsvBindByName(column = "StateCode", required = true)
     public String stateCode;
 
+    public IndiaStateCodeCSV() {
+    }
+
     public IndiaStateCodeCSV(int srNo, String stateName, String tin, String stateCode) {
         this.srNo = srNo;
         this.stateName = stateName;
@@ -30,37 +33,5 @@ public class IndiaStateCodeCSV {
                 ", tin='" + tin + '\'' +
                 ", stateCode='" + stateCode + '\'' +
                 '}';
-    }
-
-    public int getSrNo() {
-        return srNo;
-    }
-
-    public void setSrNo(int srNo) {
-        this.srNo = srNo;
-    }
-
-    public String getStateName() {
-        return stateName;
-    }
-
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
-    }
-
-    public String getTin() {
-        return tin;
-    }
-
-    public void setTin(String tin) {
-        this.tin = tin;
-    }
-
-    public String getStateCode() {
-        return stateCode;
-    }
-
-    public void setStateCode(String stateCode) {
-        this.stateCode = stateCode;
     }
 }

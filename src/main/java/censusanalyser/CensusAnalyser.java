@@ -62,26 +62,36 @@ public class CensusAnalyser {
 
     public String getStateWiseSortedData() throws CSVBuilderException
     {
-        if (stateCensusRecord == null || stateCodeRecords == null){
+        if (stateCensusRecord == null || stateCodeRecords.size() == 0){
             throw new CSVBuilderException("Data empty", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
         }
         Comparator<IndiaStateCensusCSV> censusCSVComparator = Comparator.comparing(indiaStateCensusCSV -> indiaStateCensusCSV.getState());
-        this.sort(censusCSVComparator);
+        this.sort(censusCSVComparator, stateCensusRecord);
         String sortedStateCensusJson = new Gson().toJson(stateCensusRecord);
         return sortedStateCensusJson;
     }
 
-    public void sort(Comparator<IndiaStateCensusCSV> censusCSVComparator)
+    public <T> void  sort(Comparator<T> censusCSVComparator, List CensusRecord)
     {
-        for (int iterator = 0; iterator < stateCensusRecord.size()-1; iterator++){
-            for (int inneriterator = 0; inneriterator < stateCensusRecord.size()-iterator; inneriterator++){
-                IndiaStateCensusCSV census1 = stateCensusRecord.get(inneriterator);
-                IndiaStateCensusCSV census2 = stateCensusRecord.get(inneriterator+1);
+        for (int iterator = 0; iterator < CensusRecord.size()-1; iterator++){
+            for (int inneriterator = 0; inneriterator < CensusRecord.size()-iterator - 1; inneriterator++){
+                T census1 = (T) CensusRecord.get(inneriterator);
+                T census2 = (T) CensusRecord.get(inneriterator+1);
                 if (censusCSVComparator.compare(census1,census2) > 0){
-                    stateCensusRecord.set(inneriterator, census2);
-                    stateCensusRecord.set(inneriterator+1, census1);
+                    CensusRecord.set(inneriterator, census2);
+                    CensusRecord.set(inneriterator+1, census1);
                 }
             }
         }
+    }
+
+    public String getStateCodeWiseSortedData() throws CSVBuilderException{
+        if (stateCodeRecords == null || stateCodeRecords.size() == 0){
+            throw new CSVBuilderException("Data empty", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IndiaStateCodeCSV> stateCodeCSVComparator = Comparator.comparing(stateCode -> stateCode.stateCode );
+        this.sort(stateCodeCSVComparator, stateCodeRecords);
+        String sortedStateCodeJson = new Gson().toJson(stateCodeRecords);
+        return sortedStateCodeJson;
     }
 }

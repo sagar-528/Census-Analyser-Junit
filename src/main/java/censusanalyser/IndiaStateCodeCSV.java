@@ -22,6 +22,16 @@ public class IndiaStateCodeCSV {
         this.stateCode = stateCode;
     }
 
+    @Override
+    public String toString() {
+        return "IndiaStateCodeCSV{" +
+                "srNo=" + srNo +
+                ", stateName='" + stateName + '\'' +
+                ", tin='" + tin + '\'' +
+                ", stateCode='" + stateCode + '\'' +
+                '}';
+    }
+
     public int getSrNo() {
         return srNo;
     }

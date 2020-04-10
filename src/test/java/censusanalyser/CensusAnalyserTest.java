@@ -3,6 +3,7 @@ package censusanalyser;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
+import censusanalyser.DAO.IndianStateCensusDAO;
 
 import java.io.IOException;
 
@@ -107,7 +108,7 @@ public class CensusAnalyserTest
     public void givenIndiaCensusData_WithWrongFileHeader_ShouldThrowException() throws IOException
     {
         try {
-            censusAnalyser.loadCensusData(WRONG_CSV_FILE_HEADER, IndiaStateCensusCSV.class);
+            censusAnalyser.loadCensusData(WRONG_CSV_FILE_HEADER, IndiaStateCensusDAO.class);
         } catch (CSVBuilderException e)
         {
             Assert.assertEquals(CSVBuilderException.ExceptionType.INVALID_FILE_HEADER, e.type);

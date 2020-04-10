@@ -50,7 +50,7 @@ public class CensusAnalyser {
         if (censusHashMap == null || censusHashMap.size() == 0){
             throw new CSVBuilderException("Data empty", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IndiaStateCensusCSV> censusCSVComparator = Comparator.comparing(IndiaStateCensusCSV -> IndiaStateCensusCSV.state);
+        Comparator<IndiaStateCensusCSV> censusCSVComparator = Comparator.comparing(IndiaStateCensusDAO -> IndiaStateCensusDAO.state);
         this.sort(censusCSVComparator, censusHashMap);
         censusRecord = censusHashMap.values();
         String sortedStateCensusJson = new Gson().toJson(censusRecord);
@@ -62,7 +62,7 @@ public class CensusAnalyser {
         if (censusHashMap == null || censusHashMap.size() == 0){
             throw new CSVBuilderException("Data empty", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IndiaStateCodeCSV> codeCSVComparator = Comparator.comparing(IndiaStateCodeCSV -> IndiaStateCodeCSV.stateCode);
+        Comparator<IndiaStateCodDAO> codeCSVComparator = Comparator.comparing(IndiaStateCodeDAO -> IndiaStateCodeDAO.stateCode);
         this.sort(codeCSVComparator, censusHashMap);
         censusRecord = censusHashMap.values();
         String sortedStateCodeJson = new Gson().toJson(censusHashMap);

@@ -15,31 +15,15 @@ import java.util.*;
 
 public class CensusAnalyser {
     IcsvBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
-    Collection<Object> stateCensusRecord = null;
-    Collection<Object> stateCodeRecord = null;
-    HashMap<Object, Object> stateCodeHashMap = null;
-    HashMap<Object, Object> stateCensusHashMap = null;
+    Collection<Object> censusRecord = null;
+    HashMap<Object, Object> censusHashMap = null;
 
-    public int loadIndiaCensusData(String csvFilePath) throws CSVBuilderException, IOException
+
+    public int loadCensusData(String csvFilePath, Class csvClass) throws CSVBuilderException, IOException
     {
         try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
-            stateCensusHashMap = csvBuilder.getCSVFileMap(reader, IndiaStateCensusCSV.class);
-            return stateCensusHashMap.size();
-        }catch (NoSuchFileException e) {
-            throw new CSVBuilderException(e.getMessage(),
-                    CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e) {
-            throw new CSVBuilderException(e.getMessage(),
-                    CSVBuilderException.ExceptionType.INVALID_FILE_DELIMITER);
-        }
-    }
-
-    public int loadIndiaStateCode(String csvFilePath) throws CSVBuilderException, IOException
-    {
-        try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath)))
-        {
-            stateCodeHashMap = csvBuilder.getCSVFileMap(reader, IndiaStateCodeCSV.class);
-            return stateCodeHashMap.size();
+            censusHashMap = csvBuilder.getCSVFileMap(reader, csvClass);
+            return censusHashMap.size();
         }catch (NoSuchFileException e) {
             throw new CSVBuilderException(e.getMessage(),
                     CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -63,25 +47,25 @@ public class CensusAnalyser {
 
     public String getStateWiseSortedData() throws CSVBuilderException
     {
-        if (stateCensusHashMap == null || stateCensusHashMap.size() == 0){
+        if (censusHashMap == null || censusHashMap.size() == 0){
             throw new CSVBuilderException("Data empty", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
         }
         Comparator<IndiaStateCensusCSV> censusCSVComparator = Comparator.comparing(IndiaStateCensusCSV -> IndiaStateCensusCSV.state);
-        this.sort(censusCSVComparator, stateCensusHashMap);
-        stateCensusRecord = stateCensusHashMap.values();
-        String sortedStateCensusJson = new Gson().toJson(stateCensusRecord);
+        this.sort(censusCSVComparator, censusHashMap);
+        censusRecord = censusHashMap.values();
+        String sortedStateCensusJson = new Gson().toJson(censusRecord);
         return sortedStateCensusJson;
     }
 
     public String getStateCodeWiseSortedData() throws CSVBuilderException
     {
-        if (stateCodeHashMap == null || stateCodeHashMap.size() == 0){
+        if (censusHashMap == null || censusHashMap.size() == 0){
             throw new CSVBuilderException("Data empty", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
         }
         Comparator<IndiaStateCodeCSV> codeCSVComparator = Comparator.comparing(IndiaStateCodeCSV -> IndiaStateCodeCSV.stateCode);
-        this.sort(codeCSVComparator, stateCodeHashMap);
-        stateCodeRecord = stateCodeHashMap.values();
-        String sortedStateCodeJson = new Gson().toJson(stateCodeHashMap);
+        this.sort(codeCSVComparator, censusHashMap);
+        censusRecord = censusHashMap.values();
+        String sortedStateCodeJson = new Gson().toJson(censusHashMap);
         return sortedStateCodeJson;
     }
 

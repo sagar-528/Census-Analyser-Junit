@@ -1,5 +1,6 @@
 package censusanalyser;
 
+import censusanalyser.DAO.IndianStateCensusDAO;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -15,13 +16,18 @@ import java.util.*;
 
 public class CensusAnalyser {
     IcsvBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
-    Collection<Object> censusRecord = null;
-    HashMap<Object, Object> censusHashMap = null;
+    Collection<IndianStateCensusDAO> censusRecord = null;
+    HashMap<Integer, IndianStateCensusDAO> censusHashMap = null;
 
 
     public int loadCensusData(String csvFilePath, Class csvClass) throws CSVBuilderException, IOException
     {
         try( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
+            Iterator<IndianStateCensusCSV> csvIterator = csvBuilder.getCSVFileIterator(reader, IndiaStateCensusCSV.class);
+            Integer count = 0;
+            while (csvFileIterator.hasNext()){
+
+            }
             censusHashMap = csvBuilder.getCSVFileMap(reader, csvClass);
             return censusHashMap.size();
         }catch (NoSuchFileException e) {

@@ -10,7 +10,7 @@ import java.util.List;
 public class CSVBuilder implements IcsvBuilder{
 
     @Override
-    public <T> HashMap<T> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException {
+    public <T> List<T> getCSVFileList(Reader reader, Class csvClass) throws CSVBuilderException {
         try{
                 CsvToBeanBuilder<T> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
                 csvToBeanBuilder.withType(csvClass);
@@ -19,8 +19,8 @@ public class CSVBuilder implements IcsvBuilder{
                 List list = csvToBean.parse();
                 HashMap<Integer, Object> map = new HashMap<>();
                 for (Object record.list){
-                    map.put(count, record);
-                    count++;
+                map.put(count, record);
+                count++;
             }
                 return (HashMap<T, T>) map;
             }catch (IllegalStateException e){

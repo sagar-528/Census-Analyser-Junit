@@ -16,7 +16,7 @@ import java.util.*;
 public class CensusAnalyser {
     IcsvBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
     Collection<Object> stateCensusRecord = null;
-    Collection<Object> sateCodeRecords = null;
+    Collection<Object> stateCodeRecord = null;
     HashMap<Object, Object> stateCodeHashMap = null;
     HashMap<Object, Object> stateCensusHashMap = null;
 
@@ -68,7 +68,7 @@ public class CensusAnalyser {
         }
         Comparator<IndiaStateCensusCSV> censusCSVComparator = Comparator.comparing(IndiaStateCensusCSV -> IndiaStateCensusCSV.state);
         this.sort(censusCSVComparator, stateCensusHashMap);
-        stateCensusHashMap = stateCensusHashMap.values();
+        stateCensusRecord = stateCensusHashMap.values();
         String sortedStateCensusJson = new Gson().toJson(stateCensusRecord);
         return sortedStateCensusJson;
     }
@@ -80,7 +80,7 @@ public class CensusAnalyser {
         }
         Comparator<IndiaStateCodeCSV> codeCSVComparator = Comparator.comparing(IndiaStateCodeCSV -> IndiaStateCodeCSV.stateCode);
         this.sort(codeCSVComparator, stateCodeHashMap);
-        stateCodeHashMap = (HashMap<Object, Object>) stateCodeHashMap.values();
+        stateCodeRecord = stateCodeHashMap.values();
         String sortedStateCodeJson = new Gson().toJson(stateCodeHashMap);
         return sortedStateCodeJson;
     }

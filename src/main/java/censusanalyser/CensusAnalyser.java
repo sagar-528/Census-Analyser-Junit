@@ -32,9 +32,12 @@ public class CensusAnalyser {
                this.csvFileList.add(new IndianStateCensusDAO(csvIterator.next()));
             }
             return csvFileList.size();
-        }catch (IOException e) {
+        }catch (IOException e){
+            throw  new CensusAnalyserException(e.getMessage(),CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        }
+        catch (NullPointerException e) {
             throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+                    CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }catch (CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(), e.type.name());
         }catch (RuntimeException e){

@@ -1,15 +1,21 @@
 package censusanalyser;
 
-public class CSVBuilderException extends Exception {
+public class CSVBuilderException extends Throwable {
 
     enum ExceptionType {
-        CENSUS_FILE_PROBLEM,
-        INVALID_FILE_DELIMITER, INVALID_FILE_HEADER, INVALID_FILE_TYPE, UNABLE_TO_PARSE, NO_CENSUS_DATA
+        CENSUS_FILE_PROBLEM, UNABLE_TO_PARSE
     }
 
-    ExceptionType type;
-    public CSVBuilderException(String message, ExceptionType type) {
+    CensusAnalyserException.ExceptionType type;
+
+    public CSVBuilderException(String message, CensusAnalyserException.ExceptionType type) {
         super(message);
+        this.type = type;
+    }
+
+    public CSVBuilderException(String message, CensusAnalyserException.ExceptionType type, Throwable cause){
+
+        super(message, cause);
         this.type = type;
     }
 }

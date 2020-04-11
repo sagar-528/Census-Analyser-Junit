@@ -7,7 +7,7 @@ public class USCensusCSV {
     public String State;
 
     @CsvBindByName(column = "State Id", required = true)
-    public String stateId;
+    public String StateId;
 
     @CsvBindByName(column = "Population", required = true)
     public int Population;
@@ -18,11 +18,20 @@ public class USCensusCSV {
     @CsvBindByName(column = "Population Density", required = true)
     public Double populationDensity;
 
+    public USCensusCSV(String state, String stateId, int population, double populationDensity, double totalArea) {
+        State = state;
+        StateId = stateId;
+        Population = population;
+        this.populationDensity = populationDensity;
+        this.totalArea = totalArea;
+
+    }
+
     @Override
     public String toString() {
         return "USCensusCSV{" +
                 "State='" + State + '\'' +
-                ", stateId='" + stateId + '\'' +
+                ", stateId='" + StateId + '\'' +
                 ", Population=" + Population +
                 ", totalArea=" + totalArea +
                 ", populationDensity=" + populationDensity +

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-11T11:55:22" hostname="Sagar" time="0.517">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-11T20:06:52" hostname="Sagar" time="0.257">
   <properties/>
-  <testcase name="givenIndianCensus_ThroughCensusAdapter_ReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.517"/>
+  <testcase name="givenTheStateCensusCSVFile_WhenSortedOnState_ShouldReturnSortedList" classname="censusanalyser.CensusAnalyserTest" time="0.257"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[censusanalyser.CensusAnalyserException: Error capturing CSV header!
-	at censusanalyser.CensusAdapter.loadCensusData(CensusAdapter.java:42)
-	at censusanalyser.USCensusAdapter.loadCensusData(USCensusAdapter.java:11)
-	at censusanalyser.CensusAnalyserTest.givenIndianCensus_ThroughCensusAdapter_ReturnsCorrectRecords(CensusAnalyserTest.java:128)
+  <system-err><![CDATA[censusanalyser.CensusAnalyserException: java.lang.InstantiationException: censusanalyser.IndiaStateCensusCSV
+	at censusanalyser.CensusAdapter.loadCensusData(CensusAdapter.java:43)
+	at censusanalyser.IndiaCensusAdapter.loadCensusData(IndiaCensusAdapter.java:15)
+	at censusanalyser.CensusAdapterFactory.censusFactory(CensusAdapterFactory.java:11)
+	at censusanalyser.CensusAnalyser.loadCensusData(CensusAnalyser.java:32)
+	at censusanalyser.CensusAnalyserTest.givenTheStateCensusCSVFile_WhenSortedOnState_ShouldReturnSortedList(CensusAnalyserTest.java:96)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

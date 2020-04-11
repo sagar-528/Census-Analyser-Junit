@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2020-04-11T09:05:26" hostname="Sagar" time="0.029">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-11T11:55:22" hostname="Sagar" time="0.517">
   <properties/>
-  <testcase name="givenIndianStateCode_CSVFile_ReturnCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.029">
-    <failure message="java.lang.AssertionError: expected:&lt;CENSUS_FILE_PROBLEM&gt; but was:&lt;INVALID_COUNTRY&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;CENSUS_FILE_PROBLEM&gt; but was:&lt;INVALID_COUNTRY&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at censusanalyser.CensusAnalyserTest.givenIndianStateCode_CSVFile_ReturnCorrectRecords(CensusAnalyserTest.java:57)
+  <testcase name="givenIndianCensus_ThroughCensusAdapter_ReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.517"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[censusanalyser.CensusAnalyserException: Error capturing CSV header!
+	at censusanalyser.CensusAdapter.loadCensusData(CensusAdapter.java:42)
+	at censusanalyser.USCensusAdapter.loadCensusData(USCensusAdapter.java:11)
+	at censusanalyser.CensusAnalyserTest.givenIndianCensus_ThroughCensusAdapter_ReturnsCorrectRecords(CensusAnalyserTest.java:128)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -55,8 +54,5 @@
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-</failure>
-  </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+]]></system-err>
 </testsuite>

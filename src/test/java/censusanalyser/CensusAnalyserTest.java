@@ -1,8 +1,11 @@
 package censusanalyser;
 
+import censusanalyser.DAO.censusDAO;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Map;
 
 public class CensusAnalyserTest
 {
@@ -95,11 +98,35 @@ public class CensusAnalyserTest
     }
 
     @Test
-    public void givenUSCENSUSDATA_ShouldReturnCorrectRecords() {
+    public void givenUSCensusDATA_ShouldReturnCorrectRecords() {
         int data = 0;
         try {
             data = censusAnalyser.loadCensusData(CensusAnalyser.Country.US,US_CENSUS_CSV_FILE_PATH);
             Assert.assertEquals(51, data);
+        }catch (CensusAnalyserException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenUSCensusDATA_ThroughCensusAdapter_ShouldReturnCorrectRecords()
+    {
+        CensusAdapter censusAdapter = new USCensusAdapter();
+        try {
+            Map<String, censusDAO> censusDAOMap = censusAdapter.loadCensusData(CensusAnalyser.Country.US,US_CENSUS_CSV_FILE_PATH);
+            Assert.assertEquals(51, censusDAOMap.size());
+        }catch (CensusAnalyserException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIndianCensus_ThroughCensusAdapter_ReturnsCorrectRecords()
+    {
+        CensusAdapter censusAdapter = new USCensusAdapter();
+        try {
+            Map<String, censusDAO> censusDAOMap = censusAdapter.loadCensusData(CensusAnalyser.Country.INDIA,INDIA_CENSUS_CSV_FILE_PATH);
+            Assert.assertEquals(29, censusDAOMap.size());
         }catch (CensusAnalyserException e){
             e.printStackTrace();
         }

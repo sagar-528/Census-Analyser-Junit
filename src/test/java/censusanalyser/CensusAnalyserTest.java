@@ -95,7 +95,11 @@ public class CensusAnalyserTest
     @Test
     public void givenUSCENSUSDATA_ShouldReturnCorrectRecords() {
         int data = 0;
-        data = censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH);
-        Assert.assertEquals(51,data);
+        try {
+            data = censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH);
+            Assert.assertEquals(51, data);
+        }catch (CensusAnalyserException e){
+            e.printStackTrace();
+        }
     }
 }

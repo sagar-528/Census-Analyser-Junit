@@ -24,36 +24,17 @@ public class CensusAnalyser {
         this.csvFileMap = new HashMap<String, censusDAO>();
     }
 
-    public int loadStateCensusData(String csvFilePath) throws CensusAnalyserException{
-        csvFileMap = new CensusLoader().loadCensusData(csvFilePath, IndiaStateCensusCSV.class);
+    public int loadStateCensusData(String... csvFilePath) throws CensusAnalyserException{
+        csvFileMap = new CensusLoader().loadCensusData (IndiaStateCensusCSV.class);
         return csvFileMap.size();
     }
 
-    public int loadUSCensusData(String usCensusCsvFilePath) throws CensusAnalyserException{
-        csvFileMap = new CensusLoader().loadCensusData(usCensusCsvFilePath, USCensusCSV.class);
+    public int loadUSCensusData(String... usCensusCsvFilePath) throws CensusAnalyserException{
+        csvFileMap = new CensusLoader().loadCensusData(USCensusCSV.class);
         return csvFileMap.size();
     }
 
-    public int loadStateCode(String indiaCensusCSVFilePath) throws CensusAnalyserException
-    {
-        int count = 0;
 
-        try( Reader reader = Files.newBufferedReader(Paths.get(indiaCensusCSVFilePath))) {
-            ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IndiaStateCodeCSV> stateCodeCSVIterator = csvBuilder.getCSVFileIterator(reader, IndiaStateCodeCSV.class);
-            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCodeCSVIterator;
-
-            StreamSupport.stream(csvIterable.spliterator(),false)
-                    .filter(csvState ->csvFileMap.get(csvState.stateName)!= null)
-                    .forEach(censusCSV ->csvFileMap.get(censusCSV.stateName).state = censusCSV.stateCode);
-            return count;
-        }catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(), e.type.name());
-        }
-    }
 
     public String getStateWiseSortedData(String csvFilePath) throws CensusAnalyserException
     {

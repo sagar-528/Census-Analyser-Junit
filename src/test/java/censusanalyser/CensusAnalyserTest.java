@@ -49,7 +49,7 @@ public class CensusAnalyserTest
     {
         try {
             int numOfStateCodes = censusAnalyser.loadStateCode(INDIA_STATE_CODE_FILE_PATH);
-            Assert.assertEquals(37,numOfStateCodes);
+            Assert.assertEquals(29,numOfStateCodes);
         } catch (CensusAnalyserException e)
         {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);

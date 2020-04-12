@@ -19,11 +19,6 @@ public class CensusAnalyser {
 
     Map<String, censusDAO> censusStateMap;
 
-    public CensusAnalyser()
-    {
-        this.censusStateMap = new HashMap<String, censusDAO>();
-    }
-
     public int loadCensusData(String... csvFilePath) throws CensusAnalyserException{
         censusStateMap = new CensusAdapterFactory().censusFactory (country, csvFilePath);
         return censusStateMap.size();

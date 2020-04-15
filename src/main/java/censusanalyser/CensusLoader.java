@@ -1,5 +1,7 @@
 package censusanalyser;
 
+import Com.Bridgelabz.CSVBuilderException;
+import Com.Bridgelabz.ICSVBuilder;
 import censusanalyser.DAO.censusDAO;
 
 import java.io.IOException;
@@ -62,7 +64,7 @@ public class CensusLoader
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(), e.type.name());
+            throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
         }catch (NullPointerException e){
             throw new CensusAnalyserException(e.getMessage(),CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }catch (RuntimeException e){
@@ -86,7 +88,7 @@ public class CensusLoader
                 throw new CensusAnalyserException(e.getMessage(),
                         CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
             }catch (CSVBuilderException e) {
-                throw new CensusAnalyserException(e.getMessage(), e.type.name());
+                throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
             }
         }
 }

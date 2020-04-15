@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.USCensusAdapterPattern" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-04-12T08:49:55" hostname="Sagar" time="1.011">
+<testsuite name="censusanalyser.USCensusAdapterPattern" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-04-15T17:58:59" hostname="Sagar" time="1.239">
   <properties/>
-  <testcase name="givenUSCensusData_ThroughCensusAdapter_ReturnsCorrectRecords" classname="censusanalyser.USCensusAdapterPattern" time="0.819"/>
-  <testcase name="givenEmptyCsvFile_ReturnsCustomExceptionType" classname="censusanalyser.USCensusAdapterPattern" time="0.065"/>
-  <testcase name="givenWrongHeader_InIndiaCensusData_ReturnsCorrectRecords" classname="censusanalyser.USCensusAdapterPattern" time="0.078"/>
-  <testcase name="givenWrongDelimiter_InIndiaCensusData_ReturnsCorrectRecords" classname="censusanalyser.USCensusAdapterPattern" time="0.036"/>
+  <testcase name="givenUSCensusData_ThroughCensusAdapter_ReturnsCorrectRecords" classname="censusanalyser.USCensusAdapterPattern" time="1.047"/>
+  <testcase name="givenEmptyCsvFile_ReturnsCustomExceptionType" classname="censusanalyser.USCensusAdapterPattern" time="0.119"/>
+  <testcase name="givenWrongHeader_InIndiaCensusData_ReturnsCorrectRecords" classname="censusanalyser.USCensusAdapterPattern" time="0.035"/>
+  <testcase name="givenWrongDelimiter_InIndiaCensusData_ReturnsCorrectRecords" classname="censusanalyser.USCensusAdapterPattern" time="0.034"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[censusanalyser.CensusAnalyserException: java.lang.InstantiationException: censusanalyser.USCensusCSV
-	at censusanalyser.CensusAdapter.loadCensusData(CensusAdapter.java:43)
+	at censusanalyser.CensusAdapter.loadCensusData(CensusAdapter.java:45)
 	at censusanalyser.USCensusAdapter.loadCensusData(USCensusAdapter.java:11)
 	at censusanalyser.USCensusAdapterPattern.givenUSCensusData_ThroughCensusAdapter_ReturnsCorrectRecords(USCensusAdapterPattern.java:21)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

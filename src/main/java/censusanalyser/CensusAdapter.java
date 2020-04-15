@@ -1,5 +1,7 @@
 package censusanalyser;
 
+import Com.Bridgelabz.CSVBuilderException;
+import Com.Bridgelabz.ICSVBuilder;
 import censusanalyser.DAO.censusDAO;
 
 import java.io.IOException;
@@ -43,7 +45,7 @@ public abstract class CensusAdapter {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES);
         } catch (CSVBuilderException e) {
-            throw new CensusAnalyserException(e.getMessage(), e.type.name());
+            throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
         }
     }
 }
